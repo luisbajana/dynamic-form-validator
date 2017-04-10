@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic form validator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+  <section class="container">
+
+    <form action="" id="myform">
+
+      <h3>Required or not</h3>
+
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label >Required</label>
+              <input class="form-control" data-form-validation='[{ "validation": "required" , "error_msg": "This field is required" }]'>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label >Min length (not required)</label>
+              <input class="form-control" data-form-validation='[{ "validation": "minlength" , "min_length": "4" , "error_msg": "This field must have at least 4 characters" }]'>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label >*Min length (required)</label>
+              <input class="form-control" data-form-validation='[{ "validation": "required" , "error_msg": "This field is required" } , { "validation": "minlength" , "min_length": "4" , "error_msg": "This field must have at least 4 characters" }]'>
+          </div>
+      </div>
+
+      <hr>
+
+      <h3>Matching fields (e.g. confirm your email)</h3>
+      <p>To match two fields, place the input id of the target input as a parameter like this: "target_id": "email"</p>
+
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label >*Email (required)</label>
+              <input class="form-control" id="email" data-form-validation='[{ "validation": "required" , "error_msg": "Email is required" } , { "validation": "email" , "error_msg": "That is not an email" }]'>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label >Repeat your email</label>
+              <input class="form-control" data-form-validation='[ { "validation": "confirmation" , "target_id": "email" , "error_msg": "It must be equal to the email above" } ]'>
+          </div>
+      </div>
+
+      <hr>
+
+      <h3>Range</h3>
+      <p>Since this plugin accepts multiple validation constraints, to define a range we just have to define minlength and maxlength, like this: </p>
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label >Min 4 - Max 10 characters</label>
+              <input class="form-control" data-form-validation='[{ "validation": "minlength" , "min_length": "4" , "error_msg": "This field must have at least 4 characters" } , { "validation": "maxlength" , "max_length": "10" , "error_msg": "Max 10 characters" }]'>
+          </div>
+      </div>
+
+      <hr>
+
+      <h3>Only numbers</h3>
+      <p></p>
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label>*Only numbers</label>
+              <input class="form-control" data-form-validation='[{ "validation": "required" , "error_msg": "Required" } , { "validation": "onlynumbers" , "error_msg": "Nope, that is not a number" }]'>
+          </div>
+      </div>
+
+      <hr>
+
+      <h3>Only letters a-z - A-Z</h3>
+      <p></p>
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label>*Only letters</label>
+              <input class="form-control" data-form-validation='[{ "validation": "required" , "error_msg": "Required" } , { "validation": "onlyletters" , "error_msg": "Only letters buddy" }]'>
+          </div>
+      </div>
+
+      <hr>
+
+      <h3>Special characters</h3>
+      <p></p>
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label>Not special characters allowed</label>
+              <input class="form-control" data-form-validation='[{ "validation": "specialcharacters" , "error_msg": "Please do not type special characters" }]'>
+          </div>
+      </div>
+
+
+
+      <button type="submit" class="btn btn-lg btn-primary dynamic_form_validate">Submit</button>
+    </form>
+
+  </section>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="src/dynamic-form-validator.js"></script>
+
+<script>
+        $(document).on('click', '.dynamic_form_validate', function(e) {
+            e.preventDefault();
+            var form_id = $(this).closest('form').attr('id');
+            DynamicFormValidator.init( form_id );
+        });
+        //DynamicFormValidator.show_password();
+</script>
+
+</body>
+</html>
