@@ -61,6 +61,22 @@ var DynamicFormValidator = (function(){
     else validator_clear_error( input , obj );
   }
 
+  function validator_no_accents( input , obj ){
+    var value = input.value,
+        re = /[À-ž]/;
+
+    if(re.test(value) && value !== '') validator_print_error( input , obj );
+    else validator_clear_error( input , obj );
+  }
+
+  function validator_no_whitespace( input , obj ){
+    var value = input.value,
+        re = /[\s]/;
+
+    if(re.test(value) && value !== '') validator_print_error( input , obj );
+    else validator_clear_error( input , obj );
+  }
+
   function validator_confirmation( input , obj ){
     var value = input.value,
         target = document.getElementById( obj.target_id ).value;
@@ -103,12 +119,11 @@ var DynamicFormValidator = (function(){
    }, 200);
   }
 
-  function disparador( formulario ){
+  function trigger( formulario ){
     var f = $('#'+formulario);
     if( f.find('.help-block').length === 0 ) f.submit();
     else go_up();
   }
-
 
   function classifier( input ){
 
@@ -137,6 +152,10 @@ var DynamicFormValidator = (function(){
           validator_confirmation( input , validation );
         }else if( validation_type === "onlyletters" ){
           validator_only_letters( input , validation );
+        }else if( validation_type === "noaccents" ){
+          validator_no_accents( input , validation );
+        }else if( validation_type === "nowhitespace" ){
+          validator_no_whitespace( input , validation );
         }
 
       }
@@ -145,7 +164,7 @@ var DynamicFormValidator = (function(){
 
   }
 
-  function buscador(id){
+  function finder(id){
     var inputs, index;
 
     inputs = document.getElementById(id);
@@ -161,14 +180,12 @@ var DynamicFormValidator = (function(){
       i.addEventListener("keyup", function(){ classifier( i ); }, false);
     }
 
-  //restaurar();
-
   }
 
   return {
     init: function(id){
-      buscador(id);
-      disparador(id);
+      finder(id);
+      trigger(id);
     }
   };
 

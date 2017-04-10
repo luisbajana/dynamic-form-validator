@@ -1,0 +1,16 @@
+{
+  "name": "dynamic-form-validator",
+  "description": "Form validator that uses a JSON to validate multiple parameters at once.",
+  "main": "index.html",
+  "authors": [
+    "Luis Bajana"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "validator",
+    "form",
+    "validator",
+    "jquery"
+  ],
+  "homepage": "https://github.com/luisbajana/dynamic-form-validator"
+}

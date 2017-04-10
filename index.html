@@ -92,12 +92,28 @@
       <p></p>
       <div class="row">
           <div class="form-group col-sm-6">
-              <label>Not special characters allowed</label>
+              <label>No special characters allowed</label>
               <input class="form-control" data-form-validation='[{ "validation": "specialcharacters" , "error_msg": "Please do not type special characters" }]'>
           </div>
       </div>
 
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label>No accents allowed</label>
+              <input class="form-control" data-form-validation='[ { "validation": "noaccents" , "error_msg": "It has accents" }]'>
+          </div>
+      </div>
 
+      <hr>
+
+      <h3>No Whitespace</h3>
+      <p></p>
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label>No whitespace allowed</label>
+              <input class="form-control" data-form-validation='[{ "validation": "nowhitespace" , "error_msg": "Your username cannot have whitespaces" }]'>
+          </div>
+      </div>
 
       <button type="submit" class="btn btn-lg btn-primary dynamic_form_validate">Submit</button>
     </form>
@@ -105,18 +121,15 @@
   </section>
 
 
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="src/dynamic-form-validator.js"></script>
+<script src="dist/dynamic-form-validator.min.js"></script>
 
 <script>
-        $(document).on('click', '.dynamic_form_validate', function(e) {
-            e.preventDefault();
-            var form_id = $(this).closest('form').attr('id');
-            DynamicFormValidator.init( form_id );
-        });
-        //DynamicFormValidator.show_password();
+  $(document).on('click', '.dynamic_form_validate', function(e) {
+      e.preventDefault();
+      var form_id = $(this).closest('form').attr('id');
+      DynamicFormValidator.init( form_id );
+  });
 </script>
 
 </body>

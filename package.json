@@ -1,0 +1,7 @@
+{
+  "name": "dynamic-form-validator",
+  "Description": "Form validator that uses a JSON to validate multiple parameters at once.",
+  "devDependencies": {
+    "gulp-rename": "^1.2.2"
+  }
+}
