@@ -53,6 +53,13 @@
           </div>
       </div>
 
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label >*Multiple Emails (required)</label>
+              <input class="form-control" id="multiple-emails" data-form-validation='[{ "validation": "required" , "error_msg": "Email is required" } , { "validation": "multiple-emails" , "error_msg": "Please check your email addresses" }]'>
+          </div>
+      </div>
+
       <hr>
 
       <h3>Range</h3>
@@ -112,6 +119,16 @@
           <div class="form-group col-sm-6">
               <label>No whitespace allowed</label>
               <input class="form-control" data-form-validation='[{ "validation": "nowhitespace" , "error_msg": "Your username cannot have whitespaces" }]'>
+          </div>
+      </div>
+
+
+      <h3>Checkbox</h3>
+      <p></p>
+      <div class="row">
+          <div class="form-group col-sm-6">
+            <input type="checkbox" data-form-validation='[{ "validation": "checkbox" , "error_msg": "You must accept terms and conditions" }]'>
+            <label for="subscribeNews">Accept terms and conditions</label>
           </div>
       </div>
 

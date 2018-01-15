@@ -37,6 +37,19 @@ var DynamicFormValidator = (function(){
     else validator_clear_error( input , obj );
   }
 
+  function validator_email_multiple( input , obj ){
+    var value = input.value,
+        re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        emails=value.split(',');
+
+
+    emails.map( function(v,i){
+      if(!re.test(v) && v !== '') validator_print_error( input , obj );
+      else validator_clear_error( input , obj );
+    } );
+
+  }
+
   function validator_only_numbers( input , obj ){
     var value = input.value,
         re = /^\d+$/;
@@ -86,6 +99,11 @@ var DynamicFormValidator = (function(){
 
   }
 
+  function validator_checkbox( input , obj ){
+    if( !input.checked ) validator_print_error( input , obj );
+    else validator_clear_error( input , obj );
+  }
+
   function validator_print_error( input , validation_obj ){
     var obj = $(input),
         cont = obj.closest('div'),
@@ -96,7 +114,7 @@ var DynamicFormValidator = (function(){
       help_block.remove();
       cont.addClass('has-error');
       cont.addClass('validation_'+validation_obj.validation);
-      obj.after('<span class="help-block form-error">'+error_message+'</span>');
+      cont.append('<span class="help-block form-error">'+error_message+'</span>');
     }
   }
 
@@ -144,6 +162,8 @@ var DynamicFormValidator = (function(){
           validator_max_length( input , validation );
         }else if( validation_type === "email" ){
           validator_email( input , validation );
+        }else if( validation_type === "multiple-emails" ){
+          validator_email_multiple( input , validation );
         }else if( validation_type === "onlynumbers" ){
           validator_only_numbers( input , validation );
         }else if( validation_type === "specialcharacters" ){
@@ -156,6 +176,8 @@ var DynamicFormValidator = (function(){
           validator_no_accents( input , validation );
         }else if( validation_type === "nowhitespace" ){
           validator_no_whitespace( input , validation );
+        }else if( validation_type === "checkbox" ){
+          validator_checkbox( input , validation );
         }
 
       }
